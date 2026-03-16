@@ -2,6 +2,10 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { provideBrowserGlobalErrorListeners, mergeApplicationConfig } from '@angular/core';
 import { appConfig } from './app/app.config';
 import { App } from './app/app';
+import { injectSpeedInsights } from '@vercel/speed-insights';
+
+// Initialize Vercel Speed Insights for performance monitoring
+injectSpeedInsights();
 
 bootstrapApplication(App, mergeApplicationConfig(appConfig, {
   providers: [provideBrowserGlobalErrorListeners()],
