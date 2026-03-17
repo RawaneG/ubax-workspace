@@ -1,4 +1,4 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, APP_INITIALIZER } from '@angular/core';
 import {
   provideRouter,
   withPreloading,
@@ -9,6 +9,7 @@ import { providePrimeNG } from 'primeng/config';
 import { definePreset } from '@primeuix/styled';
 import Aura from '@primeuix/themes/aura';
 import { appRoutes } from './app.routes';
+import { SpeedInsightsService } from './speed-insights.service';
 
 const UbaxPreset = definePreset(Aura, {
   semantic: {
@@ -59,5 +60,11 @@ export const appConfig: ApplicationConfig = {
         },
       },
     }),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (speedInsights: SpeedInsightsService) => () => speedInsights,
+      deps: [SpeedInsightsService],
+      multi: true,
+    },
   ],
 };
